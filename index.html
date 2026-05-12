@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>UA Generator - Premium Edition</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #DA291C;
+            --secondary: #FFC72C;
+            --dark: #1a1a1a;
+            --glass: rgba(255, 255, 255, 0.95);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        /* 100% Matching Container Design */
+        .container {
+            background: var(--glass);
+            width: 100%;
+            max-width: 480px;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border: 3px solid var(--secondary);
+            position: relative;
+        }
+
+        /* Header Section */
+        .header {
+            background: var(--primary);
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-family: 'Oswald', sans-serif;
+            color: white;
+            font-size: 2rem;
+            text-transform: uppercase;
+            line-height: 1;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+        }
+
+        .header span {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        /* Content Area */
+        .content {
+            padding: 35px 25px;
+            text-align: center;
+        }
+
+        h2 { 
+            font-size: 1.35rem; 
+            color: var(--dark); 
+            margin-bottom: 20px; 
+            font-weight: 800; 
+            text-transform: uppercase;
+        }
+
+        /* UA Display Area */
+        #ua-display {
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            padding: 20px;
+            border-radius: 15px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            word-break: break-all;
+            font-family: 'monospace';
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 25px;
+            transition: 0.3s;
+        }
+
+        /* Loading Spinner */
+        .loader {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Main Action Button (100% Match) */
+        .cta-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 22px;
+            border-radius: 15px;
+            width: 100%;
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(218, 41, 28, 0.4);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .cta-btn:hover {
+            background: #b31d14;
+            transform: scale(1.02);
+        }
+
+        .cta-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 25px;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+        .secure { color: #28a745; font-weight: bold; margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>ID Generator 2026</h1>
+        <span>SATELLITE UA FETCH SYSTEM</span>
+    </div>
+
+    <div class="content">
+        <h2>Target User Agent</h2>
+        
+        <div id="ua-display">
+            <div class="loader" id="loader"></div>
+            <span id="ua-text">Click the button to generate a secure identity agent.</span>
+        </div>
+
+        <button class="cta-btn" id="fetch-btn" onclick="fetchAgent()">
+            <span id="btn-text">Generate New Agent</span>
+            <i class="fas fa-sync-alt" id="btn-icon"></i>
+        </button>
+
+        <p style="font-size: 0.7rem; color: #888; margin-top: 20px;">
+            *Connected to encrypted Google Cloud Sheet database.
+        </p>
+    </div>
+</div>
+
+
+
+<script>
+    // මෙතනට ඔයාගේ Google Web App URL එක දාන්න
+    const API_URL = "https://script.google.com/macros/s/AKfycbyANco-VSuPnEh7EFr-Rsr2T5M5CqI-x2x8gGWkodOWIeihTP8kC2SJ_pcdNbiybIVRqw/exec";
+
+    async function fetchAgent() {
+        const display = document.getElementById('ua-text');
+        const loader = document.getElementById('loader');
+        const btnText = document.getElementById('btn-text');
+        const btn = document.getElementById('fetch-btn');
+        const btnIcon = document.getElementById('btn-icon');
+
+        // UI Loading State
+        display.style.display = "none";
+        loader.style.display = "block";
+        btnText.innerText = "Fetching...";
+        btn.disabled = true;
+        btnIcon.classList.add('fa-spin');
+
+        try {
+            const response = await fetch(API_URL);
+            const data = await response.json();
+            
+            // Success
+            display.innerText = data.ua;
+        } catch (error) {
+            // Error handling
+            display.innerText = "Connection Error! Please check your Google Script URL or permissions.";
+            console.error(error);
+        } finally {
+            // Reset UI
+            display.style.display = "block";
+            loader.style.display = "none";
+            btnText.innerText = "Generate New Agent";
+            btn.disabled = false;
+            btnIcon.classList.remove('fa-spin');
+        }
+    }
+</script>
+
+</body>
+</html>
