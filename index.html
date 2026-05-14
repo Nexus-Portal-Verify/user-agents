@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>UA Generator - Ultimate Premium 2026</title>
+    <title>UA Generator Ultra - Premium Edition</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #DA291C;
             --secondary: #FFC72C;
-            --dark: #1a1a1a;
-            --glass: rgba(255, 255, 255, 0.98);
+            --dark: #0f1115;
+            --glass: #ffffff;
             --success: #28a745;
         }
 
@@ -20,7 +20,7 @@
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
-                        url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1920&auto=format&fit=crop');
+                        url('https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=1920&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -34,12 +34,11 @@
         .container {
             background: var(--glass);
             width: 100%;
-            max-width: 480px;
+            max-width: 500px;
             border-radius: 30px;
             box-shadow: 0 25px 60px rgba(0,0,0,0.6);
             overflow: hidden;
             border: 4px solid var(--secondary);
-            position: relative;
         }
 
         .header {
@@ -47,138 +46,100 @@
             padding: 25px 20px;
             text-align: center;
             border-bottom: 5px solid var(--secondary);
+            color: white;
         }
 
         .header h1 {
             font-family: 'Oswald', sans-serif;
-            color: white;
-            font-size: 2rem;
+            font-size: 1.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
         }
 
-        /* Stats Bar Styling */
         .stats-bar {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             background: #111;
             color: white;
             padding: 12px 5px;
-            gap: 2px;
+            text-align: center;
         }
 
-        .stat-item {
-            text-align: center;
-            border-right: 1px solid #333;
-        }
-        .stat-item:last-child { border: none; }
-        .stat-label { font-size: 0.6rem; text-transform: uppercase; color: var(--secondary); font-weight: 700; }
+        .stat-label { font-size: 0.6rem; color: var(--secondary); font-weight: 700; text-transform: uppercase; }
         .stat-value { font-size: 1rem; font-weight: 800; font-family: 'Oswald', sans-serif; }
 
-        .content { padding: 30px 25px; text-align: center; }
+        .content { padding: 25px; }
 
-        /* Badge Styling */
-        #status-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            font-weight: 800;
+        /* Brand Selection Grid */
+        .filter-label { font-size: 0.75rem; font-weight: 800; color: #444; margin-bottom: 8px; display: block; text-transform: uppercase; }
+        
+        .brand-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .brand-item { background: #f4f4f4; border: 2px solid #ddd; padding: 10px; border-radius: 12px; cursor: pointer; text-align: center; transition: 0.3s; }
+        .brand-item input { display: none; }
+        .brand-item i { display: block; font-size: 1.2rem; margin-bottom: 5px; }
+        .brand-item span { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+        .brand-item.active { background: #fff5f5; border-color: var(--primary); color: var(--primary); }
+
+        /* Dropdown & FB Toggle */
+        select { width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #ddd; font-family: 'Poppins'; font-weight: 600; margin-bottom: 20px; outline: none; }
+        
+        .fb-filter-box {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
-            text-transform: uppercase;
-            background: #eee;
-            color: #333;
-            transition: 0.3s;
+            border: 1px solid #eee;
         }
 
-        /* Filter Form */
-        .filter-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        .filter-group label {
-            font-size: 0.75rem;
-            font-weight: 800;
-            color: #444;
-            display: block;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-        select {
-            width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            border: 2px solid #ddd;
-            background: #fff;
-            font-family: 'Poppins';
-            font-weight: 600;
-            color: #333;
-            outline: none;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        select:focus { border-color: var(--primary); }
+        /* Switch UI */
+        .switch { position: relative; display: inline-block; width: 44px; height: 22px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--primary); }
+        input:checked + .slider:before { transform: translateX(22px); }
 
-        /* Display Box */
+        /* Output Area */
         #ua-display {
-            background: #f8f9fa;
-            border: 2px dashed #ccc;
-            padding: 20px;
-            border-radius: 18px;
-            min-height: 110px;
+            background: #f1f1f1;
+            border: 2px dashed #bbb;
+            padding: 15px;
+            border-radius: 15px;
+            min-height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
             word-break: break-all;
             font-family: 'monospace';
-            font-size: 0.85rem;
-            color: #444;
-            margin-bottom: 25px;
+            font-size: 0.8rem;
+            color: #333;
+            margin-bottom: 20px;
             position: relative;
         }
 
-        .loader {
-            display: none;
-            width: 35px;
-            height: 35px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
+        .loader { display: none; width: 30px; height: 30px; border: 4px solid #ddd; border-top: 4px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Action Button */
         .cta-btn {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 20px;
+            padding: 18px;
             border-radius: 15px;
             width: 100%;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 800;
             text-transform: uppercase;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(218, 41, 28, 0.3);
+            box-shadow: 0 8px 20px rgba(218, 41, 28, 0.3);
             transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
         }
-        .cta-btn:hover { background: #b31d14; transform: translateY(-3px); box-shadow: 0 15px 25px rgba(218, 41, 28, 0.4); }
-        .cta-btn:active { transform: translateY(-1px); }
-        .cta-btn:disabled { background: #999; cursor: not-allowed; transform: none; }
-
-        footer {
-            margin-top: 20px;
-            font-size: 0.65rem;
-            color: #888;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
+        .cta-btn:hover { background: #b31d14; transform: translateY(-2px); }
+        .cta-btn:disabled { background: #888; }
     </style>
 </head>
 <body>
@@ -186,127 +147,114 @@
 <div class="container">
     <div class="header">
         <h1>ID GENERATOR PRO</h1>
-        <div style="color:var(--secondary); font-weight:800; font-size:0.9rem; letter-spacing: 2px;">UNIQUE FETCH v2026</div>
+        <div style="color:var(--secondary); font-weight:800; font-size:0.8rem;">UNIQUE MOBILE AGENT FETCH</div>
     </div>
 
-    <!-- Statistics Section -->
     <div class="stats-bar">
-        <div class="stat-item">
-            <div class="stat-label">Pool Size</div>
-            <div id="total-pool" class="stat-value">0</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-label">Available</div>
-            <div id="filter-count" class="stat-value">0</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-label">Last Use</div>
-            <div id="ua-age" class="stat-value" style="color:var(--secondary)">-</div>
-        </div>
+        <div><div class="stat-label">Total Pool</div><div id="total-pool" class="stat-value">0</div></div>
+        <div><div class="stat-label">Available</div><div id="filter-count" class="stat-value">0</div></div>
+        <div><div class="stat-label">Status</div><div id="ua-age" class="stat-value" style="color:var(--secondary)">-</div></div>
     </div>
 
     <div class="content">
-        <!-- Status Indicator -->
-        <div id="status-badge">SYSTEM READY</div>
-
-        <!-- Filter Dropdown -->
-        <div class="filter-group">
-            <label><i class="fab fa-chrome"></i> Select Browser Version</label>
-            <select id="version-select">
-                <option value="">ALL VERSIONS (RANDOM)</option>
-                <option value="140">CHROME 140.X</option>
-                <option value="141">CHROME 141.X</option>
-                <option value="142">CHROME 142.X</option>
-                <option value="143">CHROME 143.X</option>
-                <option value="144">CHROME 144.X</option>
-                <option value="145">CHROME 145.X</option>
-                <option value="146">CHROME 146.X</option>
-                <option value="147">CHROME 147.X</option>
-            </select>
+        <label class="filter-label">1. Select Device Brands:</label>
+        <div class="brand-grid">
+            <label class="brand-item active">
+                <input type="checkbox" value="samsung" checked onchange="updateUI(this)">
+                <i class="fas fa-mobile-alt"></i><span>Samsung</span>
+            </label>
+            <label class="brand-item active">
+                <input type="checkbox" value="pixel" checked onchange="updateUI(this)">
+                <i class="fas fa-robot"></i><span>Pixel</span>
+            </label>
+            <label class="brand-item active">
+                <input type="checkbox" value="motorola" checked onchange="updateUI(this)">
+                <i class="fas fa-microchip"></i><span>Motorola</span>
+            </label>
         </div>
 
-        <!-- UA Display -->
+        <label class="filter-label">2. Chrome Version:</label>
+        <select id="version-select">
+            <option value="">RANDOM VERSION</option>
+            <script>
+                for(let v=147; v>=129; v--) {
+                    document.write(`<option value="${v}">Chrome ${v}.x</option>`);
+                }
+            </script>
+        </select>
+
+        <div class="fb-filter-box">
+            <span style="font-size: 0.75rem; font-weight: 800; color: #444;">FACEBOOK IN-APP (IAB)</span>
+            <label class="switch">
+                <input type="checkbox" id="fb-toggle" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+
         <div id="ua-display">
             <div class="loader" id="loader"></div>
-            <span id="ua-text">Click the button to fetch a unique identity agent.</span>
+            <span id="ua-text">Click generate to start...</span>
         </div>
 
-        <!-- Action Button -->
         <button class="cta-btn" id="fetch-btn" onclick="fetchAgent()">
-            <span id="btn-text">GENERATE AGENT</span>
-            <i class="fas fa-bolt" id="btn-icon"></i>
+            <span id="btn-text">GENERATE UNIQUE UA</span>
+            <i class="fas fa-bolt"></i>
         </button>
-
-        <footer>
-            <i class="fas fa-shield-alt" style="color: var(--success);"></i> 
-            SECURE ENCRYPTED DATABASE CONNECTION
-        </footer>
     </div>
 </div>
 
 <script>
-    // පියවර 2 දී ලබාගත් Google Web App URL එක මෙතනට පේස්ට් කරන්න
+    // පියවර 1 දී ලැබුණු Google Script Web App URL එක මෙතනට දාන්න
     const API_URL = "https://script.google.com/macros/s/AKfycbyANco-VSuPnEh7EFr-Rsr2T5M5CqI-x2x8gGWkodOWIeihTP8kC2SJ_pcdNbiybIVRqw/exec";
+
+    function updateUI(el) {
+        el.parentElement.classList.toggle('active', el.checked);
+    }
 
     async function fetchAgent() {
         const display = document.getElementById('ua-text');
         const loader = document.getElementById('loader');
-        const badge = document.getElementById('status-badge');
-        const age = document.getElementById('ua-age');
-        const btn = document.getElementById('fetch-btn');
         const btnText = document.getElementById('btn-text');
-        const btnIcon = document.getElementById('btn-icon');
-        const version = document.getElementById('version-select').value;
+        const btn = document.getElementById('fetch-btn');
 
-        // Start Loading UI
+        // Get Filter Values
+        const brands = [];
+        document.querySelectorAll('.brand-item input:checked').forEach(i => brands.push(i.value));
+        const version = document.getElementById('version-select').value;
+        const fbStatus = document.getElementById('fb-toggle').checked ? "on" : "off";
+
+        if(brands.length === 0) { alert("Please select at least one brand!"); return; }
+
         display.style.display = "none";
         loader.style.display = "block";
         btn.disabled = true;
         btnText.innerText = "FETCHING...";
-        btnIcon.classList.add('fa-spin');
-        badge.innerText = "CONNECTING...";
-        badge.style.background = "#eee";
-        badge.style.color = "#333";
 
         try {
-            const finalUrl = version ? `${API_URL}?version=${version}` : API_URL;
+            const finalUrl = `${API_URL}?brands=${brands.join(',')}&version=${version}&fb_filter=${fbStatus}`;
             const response = await fetch(finalUrl);
             const data = await response.json();
             
             if (data.ua === "NO_MORE_AGENTS") {
-                display.innerHTML = "<b style='color:var(--primary);'>OUT OF STOCK!</b><br>Try a different filter.";
-                badge.innerText = "EMPTY POOL";
-                badge.style.background = "#000";
-                badge.style.color = "#fff";
-                age.innerText = "N/A";
+                display.innerHTML = "<b style='color:red;'>OUT OF STOCK!</b>";
+                document.getElementById('ua-age').innerText = "EMPTY";
             } else {
                 display.innerText = data.ua;
-                badge.innerText = data.status;
-                badge.style.background = "var(--success)";
-                badge.style.color = "#fff";
-                age.innerText = data.last_used; // හැමවිටම Just Now ලෙස එනු ඇත (Unique නිසා)
+                document.getElementById('ua-age').innerText = "JUST NOW";
             }
 
             document.getElementById('total-pool').innerText = data.total_pool;
             document.getElementById('filter-count').innerText = data.filtered_count;
 
         } catch (error) {
-            display.innerText = "NETWORK ERROR! Check API URL.";
-            badge.innerText = "ERROR";
-            badge.style.background = "var(--primary)";
-            badge.style.color = "#fff";
-            console.error(error);
+            display.innerText = "API Connection Error!";
         } finally {
             display.style.display = "block";
             loader.style.display = "none";
             btn.disabled = false;
-            btnText.innerText = "GENERATE AGENT";
-            btnIcon.classList.remove('fa-spin');
+            btnText.innerText = "GENERATE UNIQUE UA";
         }
     }
-
-    // Page එක Load වූ වහාම දත්ත පෙන්වීමට
-    window.onload = fetchAgent;
 </script>
 
 </body>
