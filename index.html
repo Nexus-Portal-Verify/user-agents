@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -71,7 +70,7 @@
 
         .header {
             background: var(--primary);
-            padding: 20px 20px;
+            padding: 20px;
             text-align: center;
             border-bottom: 5px solid var(--secondary);
             color: white;
@@ -82,6 +81,27 @@
             font-size: 1.8rem;
             text-transform: uppercase;
         }
+
+        /* Live Traffic Bar */
+        .live-traffic-bar {
+            background: #1a1a1a;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .live-dot {
+            height: 8px; width: 8px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink { 0% {opacity: 1;} 50% {opacity: 0.3;} 100% {opacity: 1;} }
 
         .stats-bar {
             display: grid;
@@ -109,14 +129,8 @@
         select { width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #ddd; font-family: 'Poppins'; font-weight: 600; margin-bottom: 20px; outline: none; }
         
         .fb-filter-box {
-            background: #f9f9f9;
-            padding: 15px;
-            border-radius: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border: 1px solid #eee;
+            background: #f9f9f9; padding: 15px; border-radius: 15px; display: flex;
+            justify-content: space-between; align-items: center; margin-bottom: 20px; border: 1px solid #eee;
         }
 
         .switch { position: relative; display: inline-block; width: 44px; height: 22px; }
@@ -126,41 +140,31 @@
         input:checked + .slider { background-color: var(--primary); }
         input:checked + .slider:before { transform: translateX(22px); }
 
+        /* Output & Progress Bar */
         #ua-display {
-            background: #f1f1f1;
-            border: 2px dashed #bbb;
-            padding: 15px;
-            border-radius: 15px;
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            word-break: break-all;
-            font-family: 'monospace';
-            font-size: 0.8rem;
-            color: #333;
-            margin-bottom: 20px;
+            background: #f1f1f1; border: 2px dashed #bbb; padding: 20px;
+            border-radius: 15px; min-height: 100px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; margin-bottom: 20px;
         }
 
-        .loader { display: none; width: 30px; height: 30px; border: 4px solid #ddd; border-top: 4px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .sync-container { width: 100%; display: none; }
+        .sync-label { font-size: 10px; font-weight: 900; color: var(--primary); margin-bottom: 8px; text-align: center; text-transform: uppercase; }
+        .progress-bg { width: 100%; background: #ddd; height: 10px; border-radius: 10px; overflow: hidden; }
+        .progress-bar { width: 0%; background: var(--primary); height: 100%; transition: 0.3s; }
+
+        #ua-text {
+            word-break: break-all; font-family: 'monospace'; font-size: 0.8rem;
+            color: #333; text-align: center;
+        }
 
         .cta-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 18px;
-            border-radius: 15px;
-            width: 100%;
-            font-size: 1.1rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(218, 41, 28, 0.3);
-            transition: 0.3s;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: var(--primary); color: white; border: none; padding: 18px;
+            border-radius: 15px; width: 100%; font-size: 1.1rem; font-weight: 800;
+            text-transform: uppercase; cursor: pointer; box-shadow: 0 8px 20px rgba(218, 41, 28, 0.3);
+            transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;
         }
         .cta-btn:hover { background: #b31d14; transform: translateY(-2px); }
+        .cta-btn:disabled { background: #888; cursor: not-allowed; transform: none; }
     </style>
 </head>
 <body>
@@ -178,6 +182,16 @@
         <div style="color:var(--secondary); font-weight:800; font-size:0.8rem;">UNIQUE MOBILE AGENT FETCH</div>
     </div>
 
+    <!-- Live Traffic -->
+    <div class="live-traffic-bar">
+        <div style="color: #4CAF50; font-size: 10px; font-weight: 900;">
+            <span class="live-dot"></span> <span id="online-count">12</span> USERS ONLINE
+        </div>
+        <div style="color: #aaa; font-size: 10px; font-weight: 900;">
+            SYNC: <span style="color:var(--secondary)">STABLE</span>
+        </div>
+    </div>
+
     <div class="stats-bar">
         <div><div class="stat-label">Total Pool</div><div id="total-pool" class="stat-value">0</div></div>
         <div><div class="stat-label">Available</div><div id="filter-count" class="stat-value">0</div></div>
@@ -187,40 +201,29 @@
     <div class="content">
         <label class="filter-label">1. Select Device Brands:</label>
         <div class="brand-grid">
-            <label class="brand-item active">
-                <input type="checkbox" value="samsung" checked onchange="updateUI(this)">
-                <i class="fas fa-mobile-alt"></i><span>Samsung</span>
-            </label>
-            <label class="brand-item active">
-                <input type="checkbox" value="pixel" checked onchange="updateUI(this)">
-                <i class="fas fa-robot"></i><span>Pixel</span>
-            </label>
-            <label class="brand-item active">
-                <input type="checkbox" value="motorola" checked onchange="updateUI(this)">
-                <i class="fas fa-microchip"></i><span>Motorola</span>
-            </label>
+            <label class="brand-item active"><input type="checkbox" value="samsung" checked onchange="updateUI(this)"><i class="fas fa-mobile-alt"></i><span>Samsung</span></label>
+            <label class="brand-item active"><input type="checkbox" value="pixel" checked onchange="updateUI(this)"><i class="fas fa-robot"></i><span>Pixel</span></label>
+            <label class="brand-item active"><input type="checkbox" value="motorola" checked onchange="updateUI(this)"><i class="fas fa-microchip"></i><span>Motorola</span></label>
         </div>
 
         <label class="filter-label">2. Chrome Version:</label>
         <select id="version-select">
             <option value="">RANDOM VERSION</option>
-            <script>
-                for(let v=147; v>=129; v--) {
-                    document.write(`<option value="${v}">Chrome ${v}.x</option>`);
-                }
-            </script>
+            <script>for(let v=147; v>=129; v--) { document.write(`<option value="${v}">Chrome ${v}.x</option>`); }</script>
         </select>
 
         <div class="fb-filter-box">
             <span style="font-size: 0.75rem; font-weight: 800; color: #444;">FACEBOOK IN-APP (IAB)</span>
-            <label class="switch">
-                <input type="checkbox" id="fb-toggle" checked>
-                <span class="slider"></span>
-            </label>
+            <label class="switch"><input type="checkbox" id="fb-toggle" checked><span class="slider"></span></label>
         </div>
 
         <div id="ua-display">
-            <div class="loader" id="loader"></div>
+            <!-- Sync Progress Bar -->
+            <div id="sync-container" class="sync-container">
+                <div class="sync-label">ESTIMATING SYNC TIME... <span id="sync-percent">0%</span></div>
+                <div class="progress-bg"><div id="sync-bar" class="progress-bar"></div></div>
+            </div>
+            <!-- UA Text Area -->
             <span id="ua-text">Click generate to start...</span>
         </div>
 
@@ -232,16 +235,25 @@
 </div>
 
 <script>
-    // පියවර 1 දී ලැබුණු Google Script Web App URL එක මෙතනට දාන්න
     const API_URL = "https://script.google.com/macros/s/AKfycbyANco-VSuPnEh7EFr-Rsr2T5M5CqI-x2x8gGWkodOWIeihTP8kC2SJ_pcdNbiybIVRqw/exec";
 
     function updateUI(el) {
         el.parentElement.classList.toggle('active', el.checked);
     }
 
+    // Real Traffic Simulation Logic
+    function updateTraffic() {
+        const count = Math.floor(Math.random() * (28 - 7 + 1)) + 7;
+        document.getElementById('online-count').innerText = count;
+    }
+    setInterval(updateTraffic, 8000); // සෑම තත්පර 8කට වරක් යූසර්ස්ලා ගණන වෙනස් වේ
+    updateTraffic();
+
     async function fetchAgent() {
         const display = document.getElementById('ua-text');
-        const loader = document.getElementById('loader');
+        const syncContainer = document.getElementById('sync-container');
+        const syncBar = document.getElementById('sync-bar');
+        const syncPercent = document.getElementById('sync-percent');
         const btnText = document.getElementById('btn-text');
         const btn = document.getElementById('fetch-btn');
 
@@ -252,34 +264,57 @@
 
         if(brands.length === 0) { alert("Please select at least one brand!"); return; }
 
+        // Start Animation
         display.style.display = "none";
-        loader.style.display = "block";
+        syncContainer.style.display = "block";
         btn.disabled = true;
-        btnText.innerText = "FETCHING...";
+        btnText.innerText = "SYNCING DB...";
+
+        let progress = 0;
+        const progInterval = setInterval(() => {
+            if (progress < 92) {
+                progress += Math.random() * 8;
+                syncBar.style.width = progress + "%";
+                syncPercent.innerText = Math.floor(progress) + "%";
+            }
+        }, 200);
 
         try {
             const finalUrl = `${API_URL}?brands=${brands.join(',')}&version=${version}&fb_filter=${fbStatus}`;
             const response = await fetch(finalUrl);
             const data = await response.json();
             
-            if (data.ua === "NO_MORE_AGENTS") {
-                display.innerHTML = "<b style='color:red;'>OUT OF STOCK!</b>";
-                document.getElementById('ua-age').innerText = "EMPTY";
-            } else {
-                display.innerText = data.ua;
-                document.getElementById('ua-age').innerText = "JUST NOW";
-            }
+            // Finish Animation
+            clearInterval(progInterval);
+            syncBar.style.width = "100%";
+            syncPercent.innerText = "100%";
 
-            document.getElementById('total-pool').innerText = data.total_pool;
-            document.getElementById('filter-count').innerText = data.filtered_count;
+            setTimeout(() => {
+                syncContainer.style.display = "none";
+                display.style.display = "block";
+                
+                if (data.ua === "NO_MORE_AGENTS") {
+                    display.innerHTML = "<b style='color:red;'>OUT OF STOCK!</b>";
+                    document.getElementById('ua-age').innerText = "EMPTY";
+                } else {
+                    display.innerText = data.ua;
+                    document.getElementById('ua-age').innerText = "JUST NOW";
+                }
+
+                document.getElementById('total-pool').innerText = data.total_pool;
+                document.getElementById('filter-count').innerText = data.filtered_count;
+                
+                btn.disabled = false;
+                btnText.innerText = "GENERATE UNIQUE USER AGENT";
+            }, 400);
 
         } catch (error) {
-            display.innerText = "API Connection Error!";
-        } finally {
+            clearInterval(progInterval);
+            display.innerText = "Connection Slow! Try Again.";
             display.style.display = "block";
-            loader.style.display = "none";
+            syncContainer.style.display = "none";
             btn.disabled = false;
-            btnText.innerText = "GENERATE UNIQUE UA";
+            btnText.innerText = "GENERATE UNIQUE USER AGENT";
         }
     }
 </script>
