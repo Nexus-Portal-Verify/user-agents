@@ -31,6 +31,31 @@
             padding: 15px;
         }
 
+        /* --- Announcement Styles --- */
+        .top-announcement {
+            background: #000;
+            color: var(--secondary);
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            overflow: hidden;
+            white-space: nowrap;
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        .scrolling-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll 15s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
         .container {
             background: var(--glass);
             width: 100%;
@@ -43,7 +68,7 @@
 
         .header {
             background: var(--primary);
-            padding: 25px 20px;
+            padding: 20px 20px;
             text-align: center;
             border-bottom: 5px solid var(--secondary);
             color: white;
@@ -53,7 +78,6 @@
             font-family: 'Oswald', sans-serif;
             font-size: 1.8rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .stats-bar {
@@ -70,7 +94,6 @@
 
         .content { padding: 25px; }
 
-        /* Brand Selection Grid */
         .filter-label { font-size: 0.75rem; font-weight: 800; color: #444; margin-bottom: 8px; display: block; text-transform: uppercase; }
         
         .brand-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
@@ -80,7 +103,6 @@
         .brand-item span { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
         .brand-item.active { background: #fff5f5; border-color: var(--primary); color: var(--primary); }
 
-        /* Dropdown & FB Toggle */
         select { width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #ddd; font-family: 'Poppins'; font-weight: 600; margin-bottom: 20px; outline: none; }
         
         .fb-filter-box {
@@ -94,7 +116,6 @@
             border: 1px solid #eee;
         }
 
-        /* Switch UI */
         .switch { position: relative; display: inline-block; width: 44px; height: 22px; }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
@@ -102,7 +123,6 @@
         input:checked + .slider { background-color: var(--primary); }
         input:checked + .slider:before { transform: translateX(22px); }
 
-        /* Output Area */
         #ua-display {
             background: #f1f1f1;
             border: 2px dashed #bbb;
@@ -117,7 +137,6 @@
             font-size: 0.8rem;
             color: #333;
             margin-bottom: 20px;
-            position: relative;
         }
 
         .loader { display: none; width: 30px; height: 30px; border: 4px solid #ddd; border-top: 4px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
@@ -139,12 +158,18 @@
             display: flex; align-items: center; justify-content: center; gap: 10px;
         }
         .cta-btn:hover { background: #b31d14; transform: translateY(-2px); }
-        .cta-btn:disabled { background: #888; }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <!-- Announcement Bar -->
+    <div class="top-announcement">
+        <div class="scrolling-text">
+            ⚠️ NOTICE: Connection might be slow due to real-time Google Sheets database sync. Please wait a moment while fetching your unique user agents.
+        </div>
+    </div>
+
     <div class="header">
         <h1>ID GENERATOR PRO</h1>
         <div style="color:var(--secondary); font-weight:800; font-size:0.8rem;">UNIQUE MOBILE AGENT FETCH</div>
@@ -197,7 +222,7 @@
         </div>
 
         <button class="cta-btn" id="fetch-btn" onclick="fetchAgent()">
-            <span id="btn-text">GENERATE UNIQUE UA</span>
+            <span id="btn-text">GENERATE UNIQUE USER AGENT</span>
             <i class="fas fa-bolt"></i>
         </button>
     </div>
@@ -217,7 +242,6 @@
         const btnText = document.getElementById('btn-text');
         const btn = document.getElementById('fetch-btn');
 
-        // Get Filter Values
         const brands = [];
         document.querySelectorAll('.brand-item input:checked').forEach(i => brands.push(i.value));
         const version = document.getElementById('version-select').value;
