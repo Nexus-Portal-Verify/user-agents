@@ -33,7 +33,6 @@
             padding: 15px;
         }
 
-        /* --- Announcement Styles --- */
         .top-announcement {
             background: #000;
             color: var(--secondary);
@@ -82,7 +81,6 @@
             text-transform: uppercase;
         }
 
-        /* Live Traffic Bar */
         .live-traffic-bar {
             background: #1a1a1a;
             padding: 8px 20px;
@@ -115,32 +113,28 @@
         .stat-label { font-size: 0.6rem; color: var(--secondary); font-weight: 700; text-transform: uppercase; }
         .stat-value { font-size: 1rem; font-weight: 800; font-family: 'Oswald', sans-serif; }
 
-        .content { padding: 25px; }
+        .content { padding: 20px; }
 
-        .filter-label { font-size: 0.75rem; font-weight: 800; color: #444; margin-bottom: 8px; display: block; text-transform: uppercase; }
+        .filter-label { font-size: 0.7rem; font-weight: 800; color: #444; margin-bottom: 8px; display: block; text-transform: uppercase; }
         
-        .brand-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .brand-item { background: #f4f4f4; border: 2px solid #ddd; padding: 10px; border-radius: 12px; cursor: pointer; text-align: center; transition: 0.3s; }
+        /* Brand Grid */
+        .brand-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 15px; }
+        .brand-item { background: #f4f4f4; border: 2px solid #ddd; padding: 8px; border-radius: 12px; cursor: pointer; text-align: center; transition: 0.3s; }
         .brand-item input { display: none; }
-        .brand-item i { display: block; font-size: 1.2rem; margin-bottom: 5px; }
-        .brand-item span { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+        .brand-item i { display: block; font-size: 1.1rem; margin-bottom: 3px; }
+        .brand-item span { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; }
         .brand-item.active { background: #fff5f5; border-color: var(--primary); color: var(--primary); }
 
-        select { width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #ddd; font-family: 'Poppins'; font-weight: 600; margin-bottom: 20px; outline: none; }
+        /* App Selection Row */
+        .app-grid { display: flex; gap: 10px; margin-bottom: 15px; overflow-x: auto; padding-bottom: 5px; }
+        .app-item { flex: 1; min-width: 80px; background: #eee; padding: 8px; border-radius: 10px; text-align: center; cursor: pointer; border: 2px solid transparent; }
+        .app-item input { display: none; }
+        .app-item i { font-size: 1.2rem; display: block; margin-bottom: 3px; }
+        .app-item span { font-size: 0.6rem; font-weight: 800; }
+        .app-item.selected { border-color: #28a745; background: #e8f5e9; color: #28a745; }
+
+        select { width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #ddd; font-family: 'Poppins'; font-weight: 600; margin-bottom: 15px; outline: none; }
         
-        .fb-filter-box {
-            background: #f9f9f9; padding: 15px; border-radius: 15px; display: flex;
-            justify-content: space-between; align-items: center; margin-bottom: 20px; border: 1px solid #eee;
-        }
-
-        .switch { position: relative; display: inline-block; width: 44px; height: 22px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
-        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background-color: var(--primary); }
-        input:checked + .slider:before { transform: translateX(22px); }
-
-        /* Output & Progress Bar */
         #ua-display {
             background: #f1f1f1; border: 2px dashed #bbb; padding: 20px;
             border-radius: 15px; min-height: 100px; display: flex; flex-direction: column;
@@ -152,83 +146,77 @@
         .progress-bg { width: 100%; background: #ddd; height: 10px; border-radius: 10px; overflow: hidden; }
         .progress-bar { width: 0%; background: var(--primary); height: 100%; transition: 0.3s; }
 
-        #ua-text {
-            word-break: break-all; font-family: 'monospace'; font-size: 0.8rem;
-            color: #333; text-align: center;
-        }
+        #ua-text { word-break: break-all; font-family: 'monospace'; font-size: 0.8rem; color: #333; text-align: center; }
 
         .cta-btn {
             background: var(--primary); color: white; border: none; padding: 18px;
-            border-radius: 15px; width: 100%; font-size: 1.1rem; font-weight: 800;
-            text-transform: uppercase; cursor: pointer; box-shadow: 0 8px 20px rgba(218, 41, 28, 0.3);
-            transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;
+            border-radius: 15px; width: 100%; font-size: 1rem; font-weight: 800;
+            text-transform: uppercase; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;
         }
-        .cta-btn:hover { background: #b31d14; transform: translateY(-2px); }
-        .cta-btn:disabled { background: #888; cursor: not-allowed; transform: none; }
+        .cta-btn:disabled { background: #888; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- Announcement Bar -->
     <div class="top-announcement">
         <div class="scrolling-text">
-            ⚠️ NOTICE: Connection might be slow due to real-time Google Sheets database sync. Please wait a moment while fetching your unique user agents.
+            ⚠️ SYSTEM UPDATE: New WhatsApp & Instagram App Agents added. Syncing live with global database.
         </div>
     </div>
 
     <div class="header">
         <h1>ID GENERATOR PRO</h1>
-        <div style="color:var(--secondary); font-weight:800; font-size:0.8rem;">UNIQUE MOBILE AGENT FETCH</div>
+        <div style="color:var(--secondary); font-weight:800; font-size:0.8rem;">MULTI-APP AGENT INJECTOR</div>
     </div>
 
-    <!-- Live Traffic -->
     <div class="live-traffic-bar">
         <div style="color: #4CAF50; font-size: 10px; font-weight: 900;">
-            <span class="live-dot"></span> <span id="online-count">12</span> FETCHES IN-PROGRESS
+            <span class="live-dot"></span> <span id="online-count">...</span> USERS ACTIVE
         </div>
         <div style="color: #aaa; font-size: 10px; font-weight: 900;">
-            SYNC: <span style="color:var(--secondary)">STABLE</span>
+            LATENCY: <span id="latency" style="color:var(--secondary)">CALCULATING</span>
         </div>
     </div>
 
     <div class="stats-bar">
-        <div><div class="stat-label">Total Pool</div><div id="total-pool" class="stat-value">0</div></div>
-        <div><div class="stat-label">Available</div><div id="filter-count" class="stat-value">0</div></div>
-        <div><div class="stat-label">Status</div><div id="ua-age" class="stat-value" style="color:var(--secondary)">-</div></div>
+        <div><div class="stat-label">Global Pool</div><div id="total-pool" class="stat-value">0</div></div>
+        <div><div class="stat-label">Matching</div><div id="filter-count" class="stat-value">0</div></div>
+        <div><div class="stat-label">Health</div><div id="ua-age" class="stat-value" style="color:var(--secondary)">-</div></div>
     </div>
 
     <div class="content">
-        <label class="filter-label">1. Select Device Brands:</label>
+        <label class="filter-label">1. Device Architecture:</label>
         <div class="brand-grid">
             <label class="brand-item active"><input type="checkbox" value="samsung" checked onchange="updateUI(this)"><i class="fas fa-mobile-alt"></i><span>Samsung</span></label>
             <label class="brand-item active"><input type="checkbox" value="pixel" checked onchange="updateUI(this)"><i class="fas fa-robot"></i><span>Pixel</span></label>
             <label class="brand-item active"><input type="checkbox" value="motorola" checked onchange="updateUI(this)"><i class="fas fa-microchip"></i><span>Motorola</span></label>
         </div>
 
-        <label class="filter-label">2. Chrome Version:</label>
-        <select id="version-select">
-            <option value="">RANDOM VERSION</option>
-            <script>for(let v=147; v>=129; v--) { document.write(`<option value="${v}">Chrome ${v}.x</option>`); }</script>
-        </select>
-
-        <div class="fb-filter-box">
-            <span style="font-size: 0.75rem; font-weight: 800; color: #444;">FACEBOOK IN-APP (IAB)</span>
-            <label class="switch"><input type="checkbox" id="fb-toggle" checked><span class="slider"></span></label>
+        <label class="filter-label">2. Specific App In-App Browser:</label>
+        <div class="app-grid">
+            <label class="app-item selected"><input type="radio" name="app-filter" value="facebook" checked onchange="updateAppUI(this)"><i class="fab fa-facebook"></i><span>Facebook</span></label>
+            <label class="app-item"><input type="radio" name="app-filter" value="whatsapp" onchange="updateAppUI(this)"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></label>
+            <label class="app-item"><input type="radio" name="app-filter" value="instagram" onchange="updateAppUI(this)"><i class="fab fa-instagram"></i><span>Instagram</span></label>
+            <label class="app-item"><input type="radio" name="app-filter" value="telegram" onchange="updateAppUI(this)"><i class="fab fa-telegram"></i><span>Telegram</span></label>
         </div>
 
+        <label class="filter-label">3. Chrome Core Version:</label>
+        <select id="version-select">
+            <option value="">LATEST (AUTO-SELECT)</option>
+            <script>for(let v=147; v>=129; v--) { document.write(`<option value="${v}">Chrome ${v}.x</script>`); }</script>
+        </select>
+
         <div id="ua-display">
-            <!-- Sync Progress Bar -->
             <div id="sync-container" class="sync-container">
-                <div class="sync-label">ESTIMATING SYNC TIME... <span id="sync-percent">0%</span></div>
+                <div class="sync-label">DATABASE SYNC: <span id="sync-percent">0%</span></div>
                 <div class="progress-bg"><div id="sync-bar" class="progress-bar"></div></div>
             </div>
-            <!-- UA Text Area -->
-            <span id="ua-text">Click generate to start...</span>
+            <span id="ua-text">Waiting for user interaction...</span>
         </div>
 
         <button class="cta-btn" id="fetch-btn" onclick="fetchAgent()">
-            <span id="btn-text">GENERATE UNIQUE USER AGENT</span>
+            <span id="btn-text">GENERATE UNIQUE AGENT</span>
             <i class="fas fa-bolt"></i>
         </button>
     </div>
@@ -236,17 +224,28 @@
 
 <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbyANco-VSuPnEh7EFr-Rsr2T5M5CqI-x2x8gGWkodOWIeihTP8kC2SJ_pcdNbiybIVRqw/exec";
+    const sessionID = 'user_' + Math.random().toString(36).substr(2, 9);
 
-    function updateUI(el) {
-        el.parentElement.classList.toggle('active', el.checked);
+    function updateUI(el) { el.parentElement.classList.toggle('active', el.checked); }
+    
+    function updateAppUI(el) {
+        document.querySelectorAll('.app-item').forEach(item => item.classList.remove('selected'));
+        el.parentElement.classList.add('selected');
     }
 
-    // Real Traffic Simulation Logic
-    function updateTraffic() {
-        const count = Math.floor(Math.random() * (28 - 7 + 1)) + 7;
-        document.getElementById('online-count').innerText = count;
+    // --- REAL-TIME HEARTBEAT ---
+    async function updateTraffic() {
+        const startTime = Date.now();
+        try {
+            const res = await fetch(`${API_URL}?uid=${sessionID}&action=traffic`);
+            const data = await res.json();
+            document.getElementById('online-count').innerText = data.active_users || "1";
+            document.getElementById('latency').innerText = (Date.now() - startTime) + "ms";
+        } catch (e) {
+            document.getElementById('online-count').innerText = "1";
+        }
     }
-    setInterval(updateTraffic, 8000); // සෑම තත්පර 8කට වරක් යූසර්ස්ලා ගණන වෙනස් වේ
+    setInterval(updateTraffic, 15000); // 15 sec Heartbeat
     updateTraffic();
 
     async function fetchAgent() {
@@ -259,32 +258,30 @@
 
         const brands = [];
         document.querySelectorAll('.brand-item input:checked').forEach(i => brands.push(i.value));
+        const app = document.querySelector('input[name="app-filter"]:checked').value;
         const version = document.getElementById('version-select').value;
-        const fbStatus = document.getElementById('fb-toggle').checked ? "on" : "off";
 
-        if(brands.length === 0) { alert("Please select at least one brand!"); return; }
+        if(brands.length === 0) { alert("Select at least one brand!"); return; }
 
-        // Start Animation
         display.style.display = "none";
         syncContainer.style.display = "block";
         btn.disabled = true;
-        btnText.innerText = "SYNCING DB...";
+        btnText.innerText = "CONNECTING...";
 
         let progress = 0;
         const progInterval = setInterval(() => {
-            if (progress < 92) {
-                progress += Math.random() * 8;
+            if (progress < 95) {
+                progress += Math.random() * 5;
                 syncBar.style.width = progress + "%";
                 syncPercent.innerText = Math.floor(progress) + "%";
             }
-        }, 200);
+        }, 150);
 
         try {
-            const finalUrl = `${API_URL}?brands=${brands.join(',')}&version=${version}&fb_filter=${fbStatus}`;
+            const finalUrl = `${API_URL}?brands=${brands.join(',')}&version=${version}&app=${app}&uid=${sessionID}`;
             const response = await fetch(finalUrl);
             const data = await response.json();
             
-            // Finish Animation
             clearInterval(progInterval);
             syncBar.style.width = "100%";
             syncPercent.innerText = "100%";
@@ -293,28 +290,28 @@
                 syncContainer.style.display = "none";
                 display.style.display = "block";
                 
-                if (data.ua === "NO_MORE_AGENTS") {
-                    display.innerHTML = "<b style='color:red;'>OUT OF STOCK!</b>";
-                    document.getElementById('ua-age').innerText = "EMPTY";
-                } else {
+                if (data.ua) {
                     display.innerText = data.ua;
-                    document.getElementById('ua-age').innerText = "JUST NOW";
+                    document.getElementById('ua-age').innerText = "AUTHENTIC";
+                } else {
+                    display.innerText = "No Agent Found. Adjust filters.";
                 }
 
-                document.getElementById('total-pool').innerText = data.total_pool;
-                document.getElementById('filter-count').innerText = data.filtered_count;
+                document.getElementById('total-pool').innerText = data.total_pool || "0";
+                document.getElementById('filter-count').innerText = data.filtered_count || "0";
+                document.getElementById('online-count').innerText = data.active_users || "1";
                 
                 btn.disabled = false;
-                btnText.innerText = "GENERATE UNIQUE USER AGENT";
-            }, 400);
+                btnText.innerText = "GENERATE UNIQUE AGENT";
+            }, 500);
 
         } catch (error) {
             clearInterval(progInterval);
-            display.innerText = "Connection Slow! Try Again.";
+            display.innerText = "Sync Failed. Check Internet.";
             display.style.display = "block";
             syncContainer.style.display = "none";
             btn.disabled = false;
-            btnText.innerText = "GENERATE UNIQUE USER AGENT";
+            btnText.innerText = "RETRY GENERATE";
         }
     }
 </script>
