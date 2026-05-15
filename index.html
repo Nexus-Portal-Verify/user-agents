@@ -75,30 +75,6 @@
             position: relative;
         }
 
-        .header-stats-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .header-stat-box {
-            background: #000;
-            color: var(--secondary);
-            font-family: 'Oswald', sans-serif;
-            font-size: 10px;
-            padding: 6px 12px;
-            border-radius: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            width: 80px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            border: 1px solid rgba(255,199,44,0.3);
-        }
-
         .header h1 {
             font-family: 'Oswald', sans-serif;
             font-size: 2.2rem;
@@ -144,9 +120,14 @@
         .content { padding: 25px 20px; }
         .filter-label { font-size: 0.75rem; font-weight: 800; color: #333; margin-bottom: 10px; display: block; text-transform: uppercase; }
 
-        /* Brand Grid */
-        .brand-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .brand-item { background: #fff; border: 2px solid #eee; padding: 12px; border-radius: 15px; cursor: pointer; text-align: center; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        /* Brand Grid - Updated for 5 items */
+        .brand-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); 
+            gap: 10px; 
+            margin-bottom: 20px; 
+        }
+        .brand-item { background: #fff; border: 2px solid #eee; padding: 12px 5px; border-radius: 15px; cursor: pointer; text-align: center; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .brand-item input { display: none; }
         .brand-item i { display: block; font-size: 1.5rem; margin-bottom: 5px; color: #666; }
         .brand-item span { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #666; }
@@ -198,15 +179,11 @@
 <div class="container">
     <div class="top-announcement">
         <div class="scrolling-text">
-            ⚠️ SYSTEM UPDATE: NEW WHATSAPP & INSTAGRAM APP AGENTS ADDED. SYNCING LIVE WITH GLOBAL DATABASE...
+            ⚠️ SYSTEM UPDATE: NEW XIAOMI & ONEPLUS DEVICE AGENTS ADDED. SYNCING LIVE WITH GLOBAL DATABASE...
         </div>
     </div>
 
     <div class="header">
-        <div class="header-stats-row">
-            
-        </div>
-        
         <h1>ID GENERATOR PRO</h1>
         <div style="color:var(--secondary); font-weight:800; font-size:0.85rem; letter-spacing: 1px;">MULTI-APP AGENT INJECTOR</div>
     </div>
@@ -232,6 +209,8 @@
             <label class="brand-item active"><input type="checkbox" value="samsung" checked onchange="updateUI(this)"><i class="fas fa-mobile-alt"></i><span>Samsung</span></label>
             <label class="brand-item"><input type="checkbox" value="pixel" onchange="updateUI(this)"><i class="fas fa-robot"></i><span>Pixel</span></label>
             <label class="brand-item"><input type="checkbox" value="motorola" onchange="updateUI(this)"><i class="fas fa-microchip"></i><span>Motorola</span></label>
+            <label class="brand-item"><input type="checkbox" value="xiaomi" onchange="updateUI(this)"><i class="fas fa-bolt"></i><span>Xiaomi</span></label>
+            <label class="brand-item"><input type="checkbox" value="oneplus" onchange="updateUI(this)"><i class="fas fa-plus-square"></i><span>OnePlus</span></label>
         </div>
 
         <label class="filter-label">2. Specific App In-App Browser:</label>
@@ -246,8 +225,7 @@
         <select id="version-select">
             <option value="">LATEST (AUTO-SELECT)</option>
             <script>
-                // Chrome Versions loop එක නිවැරදිව මෙතන තියෙනවා
-                for(let v=147; v>=129; v--) {
+                for(let v=147; v>=127; v--) {
                     document.write(`<option value="${v}">Chrome ${v}.x</option>`);
                 }
             </script>
@@ -258,7 +236,7 @@
                 <div class="sync-label">DATABASE SYNC: <span id="sync-percent">0%</span></div>
                 <div class="progress-bg"><div id="sync-bar" class="progress-bar"></div></div>
             </div>
-            <span id="ua-text">Mozilla/5.0 (Linux; Android 11; SM-A205U1 Build/A205U1UEU9CUH3; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/142.0.2250.94 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/487.0.0.44.623;IABMV/1]</span>
+            <span id="ua-text">Select options and click generate...</span>
         </div>
 
         <button class="cta-btn" id="fetch-btn" onclick="fetchAgent()">
@@ -280,23 +258,17 @@
         el.parentElement.classList.add('selected');
     }
 
-    // දත්ත පෙන්වන කොටස් පාලනය කිරීම
     async function updateDashboard() {
         const startTime = Date.now();
         try {
             const res = await fetch(`${API_URL}?uid=${sessionID}&action=traffic`);
             const data = await res.json();
             
-            document.getElementById('online-count').innerText = data.active_users || "12";
+            document.getElementById('online-count').innerText = data.active_users || Math.floor(Math.random() * 20 + 5);
             document.getElementById('latency').innerText = (Date.now() - startTime) + "ms";
             document.getElementById('total-pool').innerText = data.total_pool || "24441";
-            
-            // කළු කොටු දෙකේ දත්ත පෙන්වීම
-            if(data.chrome_list) document.getElementById('left-stat').innerHTML = "CHROME:<br>" + data.chrome_list;
-            if(data.app_list) document.getElementById('right-stat').innerHTML = "APPS:<br>" + data.app_list;
-
         } catch (e) {
-            document.getElementById('online-count').innerText = "1";
+            document.getElementById('online-count').innerText = Math.floor(Math.random() * 10 + 1);
         }
     }
     setInterval(updateDashboard, 15000);
@@ -325,7 +297,7 @@
         let progress = 0;
         const progInterval = setInterval(() => {
             if (progress < 95) {
-                progress += Math.random() * 8;
+                progress += Math.random() * 10;
                 syncBar.style.width = progress + "%";
                 syncPercent.innerText = Math.floor(progress) + "%";
             }
@@ -351,7 +323,7 @@
                     display.innerText = "DATABASE ERROR: NO MATCHING AGENT FOUND.";
                 }
 
-                document.getElementById('filter-count').innerText = data.filtered_count || "4974";
+                document.getElementById('filter-count').innerText = data.filtered_count || Math.floor(Math.random() * 1000 + 3000);
                 btn.disabled = false;
                 btnText.innerText = "GENERATE UNIQUE AGENT";
             }, 600);
