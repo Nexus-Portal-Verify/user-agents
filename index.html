@@ -190,7 +190,7 @@
             apps.forEach(a => {
                 let badge = document.getElementById('a-' + a);
                 let count = (data.app_availability && data.app_availability[a]) ? data.app_availability[a] : 0;
-                badge.innerText = count > 0 ? "AVAILABLE" : "OUT";
+                badge.innerText = count > 0 ? "AVAILABLE" : "OUT OF STOCK";
                 badge.className = count > 0 ? "badge on" : "badge off";
             });
 
