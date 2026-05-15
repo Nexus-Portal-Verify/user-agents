@@ -4,259 +4,165 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ID GENERATOR PRO - ULTRA EDITION</title>
-  
+    <title>ID GENERATOR PRO - PREMIUM EDITION</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #DA291C;
-            --secondary: #FFC72C;
-            --dark: #0f1115;
-            --glass: #ffffff;
-            --success: #28a745;
-        }
-
+        :root { --primary: #DA291C; --secondary: #FFC72C; --dark: #0f1115; --glass: rgba(255, 255, 255, 0.95); --success: #28a745; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
-                        url('https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=1920&auto=format&fit=crop');
+        
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            /* Background Image එක මෙතනින් වෙනස් කරන්න පුළුවන් */
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=1920&auto=format&fit=crop'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 10px; 
         }
-
-        .container {
-            background: var(--glass);
-            width: 100%;
-            max-width: 500px;
-            border-radius: 30px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
-            overflow: hidden;
-            border: 4px solid var(--secondary);
-        }
-
-        /* Top Bar */
-        .top-announcement {
-            background: #000;
-            color: var(--secondary);
-            font-size: 0.7rem;
-            font-weight: bold;
-            padding: 5px 0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            overflow: hidden;
-            white-space: nowrap;
-            border-bottom: 2px solid var(--secondary);
-        }
-
-        .scrolling-text {
-            display: inline-block;
-            padding-left: 100%;
-            animation: scroll 15s linear infinite;
-        }
-
+        
+        .container { background: var(--glass); width: 100%; max-width: 450px; border-radius: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); overflow: hidden; border: 3px solid var(--secondary); backdrop-filter: blur(10px); }
+        
+        .top-announcement { background: #000; color: var(--secondary); font-size: 0.65rem; font-weight: bold; padding: 5px 0; text-transform: uppercase; overflow: hidden; white-space: nowrap; border-bottom: 1px solid var(--secondary); }
+        .scrolling-text { display: inline-block; padding-left: 100%; animation: scroll 15s linear infinite; }
         @keyframes scroll { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
-        /* Header & Black Boxes */
-        .header {
-            background: var(--primary);
-            padding: 15px 20px 20px 20px;
-            text-align: center;
-            border-bottom: 5px solid var(--secondary);
-            color: white;
-            position: relative;
-        }
+        .header { background: var(--primary); padding: 12px; text-align: center; border-bottom: 4px solid var(--secondary); color: white; }
+        .header-stats-row { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+        .header-stat-box { background: #000; color: var(--secondary); font-family: 'Oswald', sans-serif; font-size: 9px; padding: 5px; border-radius: 8px; width: 48%; border: 1px solid rgba(255,199,44,0.4); }
+        .header h1 { font-family: 'Oswald', sans-serif; font-size: 1.8rem; text-transform: uppercase; line-height: 1; text-shadow: 2px 2px 0px rgba(0,0,0,0.2); }
 
-        .header h1 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 2.2rem;
-            text-transform: uppercase;
-            line-height: 1;
-        }
-
-        /* Live Traffic Bar */
-        .live-traffic-bar {
-            background: #1a1a1a;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #333;
-        }
-
-        .live-dot {
-            height: 8px; width: 8px;
-            background-color: #4CAF50;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 5px;
-            animation: blink 1s infinite;
-        }
-
+        .live-traffic-bar { background: #1a1a1a; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; }
+        .live-dot { height: 7px; width: 7px; background-color: #4CAF50; border-radius: 50%; display: inline-block; margin-right: 4px; animation: blink 1s infinite; }
         @keyframes blink { 0% {opacity: 1;} 50% {opacity: 0.3;} 100% {opacity: 1;} }
 
-        /* Stats Bar */
-        .stats-bar {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            background: #111;
-            color: white;
-            padding: 12px 5px;
-            text-align: center;
+        .stats-bar { display: grid; grid-template-columns: 1fr 1fr 1fr; background: #111; color: white; padding: 8px 5px; text-align: center; }
+        .stat-label { font-size: 0.6rem; color: #999; font-weight: 700; text-transform: uppercase; }
+        .stat-value { font-size: 1rem; font-weight: 800; font-family: 'Oswald', sans-serif; }
+
+        .content { padding: 15px 20px; }
+        .filter-label { font-size: 0.7rem; font-weight: 800; color: #333; margin-bottom: 8px; display: block; text-transform: uppercase; }
+
+        .brand-grid, .app-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 15px; }
+        .app-grid { grid-template-columns: repeat(4, 1fr); }
+        
+        .brand-item, .app-item { background: #fff; border: 1px solid #ddd; padding: 8px 2px; border-radius: 12px; cursor: pointer; text-align: center; transition: 0.2s; position: relative; }
+        .brand-item input, .app-item input { display: none; }
+        .brand-item i, .app-item i { display: block; font-size: 1.2rem; margin-bottom: 2px; color: #666; }
+        .brand-item span, .app-item span { font-size: 0.55rem; font-weight: 800; text-transform: uppercase; color: #666; display: block; }
+        
+        .badge { font-size: 7px; padding: 1px 3px; border-radius: 3px; background: #eee; color: #999; font-weight: 900; margin-top: 3px; display: inline-block; }
+        .badge.on { background: #e6fffa; color: #38a169; }
+        .badge.off { background: #fff5f5; color: #e53e3e; }
+
+        .brand-item.active { border-color: var(--primary); background: #fff5f5; box-shadow: 0 0 10px rgba(218,41,28,0.1); }
+        .app-item.selected { border-color: var(--success); background: #f0fff0; }
+
+        select { width: 100%; padding: 10px; border-radius: 12px; border: 1px solid #ddd; font-family: 'Poppins'; font-size: 0.8rem; font-weight: 600; margin-bottom: 15px; background: #fcfcfc; outline: none; }
+
+        #ua-display { background: #f8f9fa; border: 2px dashed #ccc; padding: 15px; border-radius: 18px; min-height: 90px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 15px; position: relative; overflow: hidden; }
+        #ua-text { word-break: break-all; font-family: 'monospace'; font-size: 0.75rem; color: #444; text-align: center; line-height: 1.3; z-index: 2; }
+
+        /* Request Animation & Counter */
+        .sync-container { width: 100%; display: none; z-index: 3; }
+        .sync-text { font-size: 10px; font-weight: 900; color: var(--primary); margin-bottom: 8px; text-align: center; }
+        .progress-bg { width: 100%; background: #eee; height: 12px; border-radius: 10px; overflow: hidden; position: relative; }
+        .progress-bar { 
+            width: 0%; 
+            background: linear-gradient(90deg, var(--primary), #ff5f5f); 
+            height: 100%; 
+            transition: width 0.1s linear; 
+            box-shadow: 0 0 10px rgba(218,41,28,0.5);
+            position: relative;
         }
-
-        .stat-label { font-size: 0.65rem; color: #999; font-weight: 700; text-transform: uppercase; }
-        .stat-value { font-size: 1.1rem; font-weight: 800; font-family: 'Oswald', sans-serif; }
-
-        /* Content */
-        .content { padding: 25px 20px; }
-        .filter-label { font-size: 0.75rem; font-weight: 800; color: #333; margin-bottom: 10px; display: block; text-transform: uppercase; }
-
-        /* Brand Grid - Updated for 5 items */
-        .brand-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); 
-            gap: 10px; 
-            margin-bottom: 20px; 
+        /* Loading animation effect */
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background-image: linear-gradient(-45deg, rgba(255,255,255,.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.2) 50%, rgba(255,255,255,.2) 75%, transparent 75%, transparent);
+            background-size: 30px 30px;
+            animation: move 1s linear infinite;
         }
-        .brand-item { background: #fff; border: 2px solid #eee; padding: 12px 5px; border-radius: 15px; cursor: pointer; text-align: center; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .brand-item input { display: none; }
-        .brand-item i { display: block; font-size: 1.5rem; margin-bottom: 5px; color: #666; }
-        .brand-item span { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #666; }
-        .brand-item.active { border-color: var(--primary); background: #fff5f5; }
-        .brand-item.active i, .brand-item.active span { color: var(--primary); }
+        @keyframes move { 0% { background-position: 0 0; } 100% { background-position: 30px 0; } }
 
-        /* App Grid */
-        .app-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; margin-bottom: 20px; }
-        .app-item { background: #f4f4f4; padding: 10px 5px; border-radius: 12px; text-align: center; cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
-        .app-item input { display: none; }
-        .app-item i { font-size: 1.3rem; display: block; margin-bottom: 5px; color: #444; }
-        .app-item span { font-size: 0.6rem; font-weight: 800; color: #444; }
-        .app-item.selected { border-color: #28a745; background: #f0fff0; color: #28a745; }
-        .app-item.selected i, .app-item.selected span { color: #28a745; }
-
-        /* Select Input */
-        select { width: 100%; padding: 15px; border-radius: 15px; border: 2px solid #eee; font-family: 'Poppins'; font-weight: 600; margin-bottom: 20px; outline: none; background: #f9f9f9; cursor: pointer; appearance: none; }
-
-        /* Display Box */
-        #ua-display {
-            background: #f8f9fa; border: 2px dashed #ccc; padding: 25px 15px;
-            border-radius: 20px; min-height: 120px; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; margin-bottom: 25px;
-        }
-
-        #ua-text { word-break: break-all; font-family: 'monospace'; font-size: 0.85rem; color: #444; text-align: center; line-height: 1.4; }
-
-        /* Sync Loader */
-        .sync-container { width: 100%; display: none; }
-        .sync-label { font-size: 11px; font-weight: 900; color: var(--primary); margin-bottom: 10px; text-align: center; text-transform: uppercase; }
-        .progress-bg { width: 100%; background: #eee; height: 12px; border-radius: 10px; overflow: hidden; }
-        .progress-bar { width: 0%; background: var(--primary); height: 100%; transition: 0.3s; }
-
-        /* CTA Button */
-        .cta-btn {
-            background: var(--primary); color: white; border: none; padding: 20px;
-            border-radius: 18px; width: 100%; font-size: 1.1rem; font-weight: 800;
-            text-transform: uppercase; cursor: pointer; transition: 0.3s; display: flex; 
-            align-items: center; justify-content: center; gap: 12px;
-            box-shadow: 0 10px 20px rgba(218, 41, 28, 0.3);
-        }
-        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(218, 41, 28, 0.4); }
-        .cta-btn:active { transform: translateY(0); }
-        .cta-btn:disabled { background: #bbb; box-shadow: none; transform: none; }
+        .cta-btn { background: var(--primary); color: white; border: none; padding: 16px; border-radius: 15px; width: 100%; font-size: 1.1rem; font-weight: 800; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 8px 20px rgba(218, 41, 28, 0.4); transition: 0.2s; }
+        .cta-btn:active { transform: scale(0.96); box-shadow: 0 4px 10px rgba(218, 41, 28, 0.2); }
+        .cta-btn:disabled { background: #999; cursor: not-allowed; box-shadow: none; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="top-announcement">
-        <div class="scrolling-text">
-            ⚠️ SYSTEM UPDATE: NEW XIAOMI & ONEPLUS DEVICE AGENTS ADDED. SYNCING LIVE WITH GLOBAL DATABASE...
-        </div>
+        <div class="scrolling-text">⚠️ PREMIUM AGENTS UPDATED: REAL-TIME DATABASE SYNC ACTIVE. NEW XIAOMI & ONEPLUS NODES OPERATIONAL...</div>
     </div>
 
     <div class="header">
+        <div class="header-stats-row">
+            <div class="header-stat-box" id="left-stat">CHROME:<br>SYNCING...</div>
+            <div class="header-stat-box" id="right-stat">APPS:<br>SYNCING...</div>
+        </div>
         <h1>ID GENERATOR PRO</h1>
-        <div style="color:var(--secondary); font-weight:800; font-size:0.85rem; letter-spacing: 1px;">MULTI-APP AGENT INJECTOR</div>
     </div>
 
     <div class="live-traffic-bar">
-        <div style="color: #4CAF50; font-size: 11px; font-weight: 900;">
-            <span class="live-dot"></span> <span id="online-count">0</span> USERS ACTIVE
-        </div>
-        <div style="color: #888; font-size: 11px; font-weight: 900;">
-            LATENCY: <span id="latency" style="color:var(--secondary)">0ms</span>
-        </div>
+        <div style="color: #4CAF50; font-size: 10px; font-weight: 900;"><span class="live-dot"></span> <span id="online-count">0</span> ACTIVE</div>
+        <div style="color: #888; font-size: 10px; font-weight: 900;">PING: <span id="latency" style="color:var(--secondary)">0ms</span></div>
     </div>
 
     <div class="stats-bar">
-        <div><div class="stat-label">Global Pool</div><div id="total-pool" class="stat-value">24441</div></div>
-        <div><div class="stat-label">Matching</div><div id="filter-count" class="stat-value">4974</div></div>
-        <div><div class="stat-label">Health</div><div id="ua-age" class="stat-value" style="color:var(--secondary)">AUTHENTIC</div></div>
+        <div><div class="stat-label">Database</div><div id="total-pool" class="stat-value">0</div></div>
+        <div><div class="stat-label">Matches</div><div id="filter-count" class="stat-value">0</div></div>
+        <div><div class="stat-label">System</div><div id="ua-age" class="stat-value" style="color:var(--secondary)">SECURE</div></div>
     </div>
 
     <div class="content">
-        <label class="filter-label">1. Device Architecture:</label>
+        <label class="filter-label">1. Select Device Architecture:</label>
         <div class="brand-grid">
-            <label class="brand-item active"><input type="checkbox" value="samsung" checked onchange="updateUI(this)"><i class="fas fa-mobile-alt"></i><span>Samsung</span></label>
-            <label class="brand-item"><input type="checkbox" value="pixel" onchange="updateUI(this)"><i class="fas fa-robot"></i><span>Pixel</span></label>
-            <label class="brand-item"><input type="checkbox" value="motorola" onchange="updateUI(this)"><i class="fas fa-microchip"></i><span>Motorola</span></label>
-            <label class="brand-item"><input type="checkbox" value="xiaomi" onchange="updateUI(this)"><i class="fas fa-bolt"></i><span>Xiaomi</span></label>
-            <label class="brand-item"><input type="checkbox" value="oneplus" onchange="updateUI(this)"><i class="fas fa-plus-square"></i><span>OnePlus</span></label>
+            <label class="brand-item active"><input type="checkbox" value="samsung" checked onchange="updateUI(this)"><i class="fas fa-mobile-alt"></i><span>Samsung</span><div class="badge" id="b-samsung">...</div></label>
+            <label class="brand-item"><input type="checkbox" value="pixel" onchange="updateUI(this)"><i class="fas fa-robot"></i><span>Pixel</span><div class="badge" id="b-pixel">...</div></label>
+            <label class="brand-item"><input type="checkbox" value="motorola" onchange="updateUI(this)"><i class="fas fa-microchip"></i><span>Moto</span><div class="badge" id="b-motorola">...</div></label>
+            <label class="brand-item"><input type="checkbox" value="xiaomi" onchange="updateUI(this)"><i class="fas fa-bolt"></i><span>Xiaomi</span><div class="badge" id="b-xiaomi">...</div></label>
+            <label class="brand-item"><input type="checkbox" value="oneplus" onchange="updateUI(this)"><i class="fas fa-plus-square"></i><span>OnePlus</span><div class="badge" id="b-oneplus">...</div></label>
         </div>
 
-        <label class="filter-label">2. Specific App In-App Browser:</label>
+        <label class="filter-label">2. Target In-App Browser:</label>
         <div class="app-grid">
-            <label class="app-item selected"><input type="radio" name="app-filter" value="facebook" checked onchange="updateAppUI(this)"><i class="fab fa-facebook"></i><span>Facebook</span></label>
-            <label class="app-item"><input type="radio" name="app-filter" value="whatsapp" onchange="updateAppUI(this)"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></label>
-            <label class="app-item"><input type="radio" name="app-filter" value="instagram" onchange="updateAppUI(this)"><i class="fab fa-instagram"></i><span>Instagram</span></label>
-            <label class="app-item"><input type="radio" name="app-filter" value="telegram" onchange="updateAppUI(this)"><i class="fab fa-telegram"></i><span>Telegram</span></label>
+            <label class="app-item selected"><input type="radio" name="app-filter" value="facebook" checked onchange="updateAppUI(this)"><i class="fab fa-facebook"></i><span>FB</span><div class="badge" id="a-facebook">...</div></label>
+            <label class="app-item"><input type="radio" name="app-filter" value="whatsapp" onchange="updateAppUI(this)"><i class="fab fa-whatsapp"></i><span>WA</span><div class="badge" id="a-whatsapp">...</div></label>
+            <label class="app-item"><input type="radio" name="app-filter" value="instagram" onchange="updateAppUI(this)"><i class="fab fa-instagram"></i><span>IG</span><div class="badge" id="a-instagram">...</div></label>
+            <label class="app-item"><input type="radio" name="app-filter" value="telegram" onchange="updateAppUI(this)"><i class="fab fa-telegram"></i><span>TG</span><div class="badge" id="a-telegram">...</div></label>
         </div>
 
-        <label class="filter-label">3. Chrome Core Version:</label>
+        <label class="filter-label">3. Chrome Core:</label>
         <select id="version-select">
-            <option value="">LATEST (AUTO-SELECT)</option>
-            <script>
-                for(let v=147; v>=127; v--) {
-                    document.write(`<option value="${v}">Chrome ${v}.x</option>`);
-                }
-            </script>
+            <option value="">LATEST STABLE (AUTO)</option>
+            <script>for(let v=147; v>=129; v--) { document.write(`<option value="${v}">Chrome ${v}.x</option>`); }</script>
         </select>
 
         <div id="ua-display">
             <div id="sync-container" class="sync-container">
-                <div class="sync-label">DATABASE SYNC: <span id="sync-percent">0%</span></div>
+                <div class="sync-text">INJECTING AGENT: <span id="sync-percent">0%</span></div>
                 <div class="progress-bg"><div id="sync-bar" class="progress-bar"></div></div>
             </div>
-            <span id="ua-text">Select options and click generate...</span>
+            <span id="ua-text">Configure filters & generate unique agent...</span>
         </div>
 
-        <button class="cta-btn" id="fetch-btn" onclick="fetchAgent()">
-            <span id="btn-text">GENERATE UNIQUE AGENT</span>
-            <i class="fas fa-bolt"></i>
-        </button>
+        <button class="cta-btn" id="fetch-btn" onclick="fetchAgent()"><span id="btn-text">GENERATE UNIQUE AGENT</span><i class="fas fa-bolt"></i></button>
     </div>
 </div>
 
 <script>
-    // ඔබේ Google Apps Script URL එක මෙතනට දමන්න
     const API_URL = "https://script.google.com/macros/s/AKfycbyANco-VSuPnEh7EFr-Rsr2T5M5CqI-x2x8gGWkodOWIeihTP8kC2SJ_pcdNbiybIVRqw/exec";
-    const sessionID = 'user_' + Math.random().toString(36).substr(2, 9);
+    const sessionID = 'p_' + Math.random().toString(36).substr(2, 6);
 
     function updateUI(el) { el.parentElement.classList.toggle('active', el.checked); }
-    
-    function updateAppUI(el) {
-        document.querySelectorAll('.app-item').forEach(item => item.classList.remove('selected'));
-        el.parentElement.classList.add('selected');
-    }
+    function updateAppUI(el) { document.querySelectorAll('.app-item').forEach(item => item.classList.remove('selected')); el.parentElement.classList.add('selected'); }
 
     async function updateDashboard() {
         const startTime = Date.now();
@@ -264,13 +170,33 @@
             const res = await fetch(`${API_URL}?uid=${sessionID}&action=traffic`);
             const data = await res.json();
             
-            document.getElementById('online-count').innerText = data.active_users || Math.floor(Math.random() * 20 + 5);
+            document.getElementById('online-count').innerText = data.active_users || "1";
             document.getElementById('latency').innerText = (Date.now() - startTime) + "ms";
-            document.getElementById('total-pool').innerText = data.total_pool || "24441";
-        } catch (e) {
-            document.getElementById('online-count').innerText = Math.floor(Math.random() * 10 + 1);
-        }
+            document.getElementById('total-pool').innerText = data.total_pool || "0";
+            document.getElementById('left-stat').innerHTML = "CHROME:<br>" + (data.chrome_list || "WAIT...");
+            document.getElementById('right-stat').innerHTML = "APPS:<br>" + (data.app_list || "WAIT...");
+
+            // Strict Stock Checking
+            const brands = ['samsung', 'pixel', 'motorola', 'xiaomi', 'oneplus'];
+            const apps = ['facebook', 'whatsapp', 'instagram', 'telegram'];
+
+            brands.forEach(b => {
+                let badge = document.getElementById('b-' + b);
+                let count = (data.brand_availability && data.brand_availability[b]) ? data.brand_availability[b] : 0;
+                badge.innerText = count > 0 ? "AVAILABLE" : "OUT";
+                badge.className = count > 0 ? "badge on" : "badge off";
+            });
+
+            apps.forEach(a => {
+                let badge = document.getElementById('a-' + a);
+                let count = (data.app_availability && data.app_availability[a]) ? data.app_availability[a] : 0;
+                badge.innerText = count > 0 ? "AVAILABLE" : "OUT";
+                badge.className = count > 0 ? "badge on" : "badge off";
+            });
+
+        } catch (e) { console.log("System offline"); }
     }
+
     setInterval(updateDashboard, 15000);
     updateDashboard();
 
@@ -279,34 +205,34 @@
         const syncContainer = document.getElementById('sync-container');
         const syncBar = document.getElementById('sync-bar');
         const syncPercent = document.getElementById('sync-percent');
-        const btnText = document.getElementById('btn-text');
         const btn = document.getElementById('fetch-btn');
+        const btnText = document.getElementById('btn-text');
 
-        const brands = [];
-        document.querySelectorAll('.brand-item input:checked').forEach(i => brands.push(i.value));
+        const brands = Array.from(document.querySelectorAll('.brand-item input:checked')).map(i => i.value);
         const app = document.querySelector('input[name="app-filter"]:checked').value;
         const version = document.getElementById('version-select').value;
 
-        if(brands.length === 0) { alert("Please select at least one device brand!"); return; }
+        if(brands.length === 0) { alert("Select at least one brand!"); return; }
 
         display.style.display = "none";
         syncContainer.style.display = "block";
         btn.disabled = true;
-        btnText.innerText = "INJECTING AGENT...";
+        btnText.innerText = "PROCESSING...";
 
+        // Progress Animation Logic (0 to 100%)
         let progress = 0;
         const progInterval = setInterval(() => {
-            if (progress < 95) {
-                progress += Math.random() * 10;
+            if (progress < 98) {
+                progress += Math.random() * 5;
+                if(progress > 98) progress = 98;
                 syncBar.style.width = progress + "%";
                 syncPercent.innerText = Math.floor(progress) + "%";
             }
-        }, 100);
+        }, 50);
 
         try {
-            const finalUrl = `${API_URL}?brands=${brands.join(',')}&version=${version}&app=${app}&uid=${sessionID}`;
-            const response = await fetch(finalUrl);
-            const data = await response.json();
+            const res = await fetch(`${API_URL}?brands=${brands.join(',')}&version=${version}&app=${app}&uid=${sessionID}`);
+            const data = await res.json();
             
             clearInterval(progInterval);
             syncBar.style.width = "100%";
@@ -315,29 +241,21 @@
             setTimeout(() => {
                 syncContainer.style.display = "none";
                 display.style.display = "block";
-                
-                if (data.ua) {
-                    display.innerText = data.ua;
-                    document.getElementById('ua-age').innerText = "AUTHENTIC";
-                } else {
-                    display.innerText = "DATABASE ERROR: NO MATCHING AGENT FOUND.";
-                }
-
-                document.getElementById('filter-count').innerText = data.filtered_count || Math.floor(Math.random() * 1000 + 3000);
+                display.innerText = data.ua || "ERROR: NO MATCHING AGENT FOUND.";
+                document.getElementById('filter-count').innerText = data.filtered_count || "0";
                 btn.disabled = false;
                 btnText.innerText = "GENERATE UNIQUE AGENT";
-            }, 600);
-
+                updateDashboard();
+            }, 500);
         } catch (error) {
             clearInterval(progInterval);
-            display.innerText = "CONNECTION FAILED: CHECK YOUR NETWORK.";
+            display.innerText = "CRITICAL CONNECTION ERROR.";
             display.style.display = "block";
             syncContainer.style.display = "none";
             btn.disabled = false;
-            btnText.innerText = "RETRY INJECTION";
+            btnText.innerText = "RETRY GENERATION";
         }
     }
 </script>
-
 </body>
 </html>
