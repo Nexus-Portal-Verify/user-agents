@@ -13,7 +13,6 @@
         
         body { 
             font-family: 'Poppins', sans-serif; 
-            /* Background Image එක මෙතනින් වෙනස් කරන්න පුළුවන් */
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=1920&auto=format&fit=crop'); 
             background-size: cover;
             background-position: center;
@@ -67,7 +66,6 @@
         #ua-display { background: #f8f9fa; border: 2px dashed #ccc; padding: 15px; border-radius: 18px; min-height: 90px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 15px; position: relative; overflow: hidden; }
         #ua-text { word-break: break-all; font-family: 'monospace'; font-size: 0.75rem; color: #444; text-align: center; line-height: 1.3; z-index: 2; }
 
-        /* Request Animation & Counter */
         .sync-container { width: 100%; display: none; z-index: 3; }
         .sync-text { font-size: 10px; font-weight: 900; color: var(--primary); margin-bottom: 8px; text-align: center; }
         .progress-bg { width: 100%; background: #eee; height: 12px; border-radius: 10px; overflow: hidden; position: relative; }
@@ -79,7 +77,6 @@
             box-shadow: 0 0 10px rgba(218,41,28,0.5);
             position: relative;
         }
-        /* Loading animation effect */
         .progress-bar::after {
             content: '';
             position: absolute;
@@ -96,118 +93,6 @@
     </style>
 </head>
 <body>
-
-
-
-
-
-
-<div id="loading-overlay">
-  <style>
-    #loading-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #000; /* කළු පසුබිම */
-      z-index: 10000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: opacity 0.8s ease;
-    }
-
-    .loader {
-      --hue: 210;
-      --size: 100px;
-      --border: 10px;
-      --speed: 1s;
-      --blur: var(--border);
-    }
-
-    .loader {
-      width: var(--border);
-      aspect-ratio: 1;
-      background: white;
-      border-radius: 50%;
-      position: absolute;
-      --y: calc((var(--size) * -0.5) + (var(--border) * 0.5));
-      /* ආරම්භක අගය 0deg */
-      transform: rotate(0deg) translateY(var(--y));
-      /* දකුණට කරකැවීමට spin ඇනිමේෂන් එක */
-      animation: spin var(--speed) infinite linear;
-    }
-
-    .loader::before {
-      content: "";
-      position: absolute;
-      inset: calc(var(--border) * -0.5);
-      border-radius: 50%;
-      background: white;
-      filter: blur(var(--blur));
-      z-index: -1;
-    }
-
-    .loader::after {
-      content: "";
-      width: var(--size);
-      aspect-ratio: 1;
-      position: absolute;
-      top: 0%;
-      left: 50%;
-      translate: -50% 0;
-      background: conic-gradient(
-        white,
-        hsl(var(--hue), 100%, 70%),
-        hsl(var(--hue), 100%, 10%),
-        transparent 65%
-      );
-      border-radius: 50%;
-      mask: radial-gradient(
-        transparent calc(((var(--size) * 0.5) - var(--border)) - 1px),
-        white calc((var(--size) * 0.5) - var(--border))
-      );
-    }
-
-    /* දකුණට කැරකෙන්න මෙතන අගය +360deg කළා */
-    @keyframes spin {
-      to {
-        transform: rotate(360deg) translateY(var(--y));
-      }
-    }
-
-    .hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-  </style>
-
-  <div aria-live="assertive" role="alert" class="loader"></div>
-  <div style="margin-top: 150px; color: white; font-family: sans-serif; letter-spacing: 2px; font-size: 12px;">SYSTEM BOOTING...</div>
-</div>
-
-<script>
-  window.addEventListener('load', function() {
-    // සෙකන්ඩ් 6කින් පසු ඉවත් වේ (6000ms)
-    setTimeout(function() {
-      const loaderOverlay = document.getElementById('loading-overlay');
-      loaderOverlay.classList.add('hidden');
-      setTimeout(() => {
-        loaderOverlay.style.display = 'none';
-      }, 800);
-    }, 6000);
-  });
-</script>
-
-
-
-
-
-
-
-
-    
 
 <div class="container">
     <div class="top-announcement">
@@ -248,7 +133,7 @@
             <label class="app-item selected"><input type="radio" name="app-filter" value="facebook" checked onchange="updateAppUI(this)"><i class="fab fa-facebook"></i><span>FB</span><div class="badge" id="a-facebook">...</div></label>
             <label class="app-item"><input type="radio" name="app-filter" value="whatsapp" onchange="updateAppUI(this)"><i class="fab fa-whatsapp"></i><span>WA</span><div class="badge" id="a-whatsapp">...</div></label>
             <label class="app-item"><input type="radio" name="app-filter" value="instagram" onchange="updateAppUI(this)"><i class="fab fa-instagram"></i><span>IG</span><div class="badge" id="a-instagram">...</div></label>
-            <label class="app-item"><input type="radio" name="app-filter" value="telegram" onchange="updateAppUI(this)"><i class="fab fa-telegram"></i><span>TG</span><div class="badge" id="a-telegram">...</div></label>
+            <label class="app-item"><input type="radio" name="app-filter" value="tiktok" onchange="updateAppUI(this)"><i class="fab fa-tiktok"></i><span>TT</span><div class="badge" id="a-tiktok">...</div></label>
         </div>
 
         <label class="filter-label">3. Chrome Core:</label>
@@ -288,9 +173,8 @@
             document.getElementById('left-stat').innerHTML = "CHROME:<br>" + (data.chrome_list || "WAIT...");
             document.getElementById('right-stat').innerHTML = "APPS:<br>" + (data.app_list || "WAIT...");
 
-            // Strict Stock Checking
             const brands = ['samsung', 'pixel', 'motorola', 'xiaomi', 'oneplus'];
-            const apps = ['facebook', 'whatsapp', 'instagram', 'telegram'];
+            const apps = ['facebook', 'whatsapp', 'instagram', 'tiktok'];
 
             brands.forEach(b => {
                 let badge = document.getElementById('b-' + b);
@@ -331,7 +215,6 @@
         btn.disabled = true;
         btnText.innerText = "PROCESSING...";
 
-        // Progress Animation Logic (0 to 100%)
         let progress = 0;
         const progInterval = setInterval(() => {
             if (progress < 98) {
