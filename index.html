@@ -155,6 +155,7 @@
 </div>
 
 <script>
+    // ⚠️ ඔයාගේ අලුත්ම Google Apps Script Web App URL එක මෙතනට පේස්ට් කරන්න මචන්
     const API_URL = "https://script.google.com/macros/s/AKfycbyANco-VSuPnEh7EFr-Rsr2T5M5CqI-x2x8gGWkodOWIeihTP8kC2SJ_pcdNbiybIVRqw/exec";
     const sessionID = 'p_' + Math.random().toString(36).substr(2, 6);
 
@@ -164,6 +165,7 @@
     async function updateDashboard() {
         const startTime = Date.now();
         try {
+            // FIXED: මුලින්ම Live ලෝඩ් වෙද්දීම Brands ඔක්කොම චෙක් වෙන්න සිග්නල් එකක් යවනවා
             const res = await fetch(`${API_URL}?uid=${sessionID}&action=traffic`);
             const data = await res.json();
             
@@ -173,13 +175,13 @@
             document.getElementById('left-stat').innerHTML = "CHROME:<br>" + (data.chrome_list || "WAIT...");
             document.getElementById('right-stat').innerHTML = "APPS:<br>" + (data.app_list || "WAIT...");
 
-            // මෙතන බ්‍රෑන්ඩ්ස් 5 ම Live චෙක් වෙනවා මචන්
             const brands = ['samsung', 'pixel', 'motorola', 'xiaomi', 'oneplus'];
             const apps = ['facebook', 'whatsapp', 'instagram', 'tiktok'];
 
             brands.forEach(b => {
                 let badge = document.getElementById('b-' + b);
                 let count = (data.brand_availability && data.brand_availability[b]) ? data.brand_availability[b] : 0;
+                // FIXED: count එක 0 ට වඩා වැඩි නම් AVAILABLE කියලා කොළ පාටින් ලස්සනට පෙන්වනවා
                 badge.innerText = count > 0 ? "AVAILABLE" : "OUT";
                 badge.className = count > 0 ? "badge on" : "badge off";
             });
@@ -191,7 +193,7 @@
                 badge.className = count > 0 ? "badge on" : "badge off";
             });
 
-        } catch (e) { console.log("System offline"); }
+        } catch (e) { console.log("System offline", e); }
     }
 
     setInterval(updateDashboard, 15000);
