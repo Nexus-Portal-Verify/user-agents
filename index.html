@@ -46,8 +46,8 @@
         .content { padding: 15px 20px; }
         .filter-label { font-size: 0.7rem; font-weight: 800; color: #333; margin-bottom: 8px; display: block; text-transform: uppercase; }
 
-        .brand-grid, .app-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 15px; }
-        .app-grid { grid-template-columns: repeat(4, 1fr); }
+        .brand-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 15px; }
+        .app-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 15px; }
         
         .brand-item, .app-item { background: #fff; border: 1px solid #ddd; padding: 8px 2px; border-radius: 12px; cursor: pointer; text-align: center; transition: 0.2s; position: relative; }
         .brand-item input, .app-item input { display: none; }
@@ -139,7 +139,7 @@
         <label class="filter-label">3. Chrome Core:</label>
         <select id="version-select">
             <option value="">LATEST STABLE (AUTO)</option>
-            <script>for(let v=147; v>=129; v--) { document.write(`<option value="${v}">Chrome ${v}.x</option>`); }</script>
+            <script>for(let v=148; v>=129; v--) { document.write(`<option value="${v}">Chrome ${v}.x</option>`); }</script>
         </select>
 
         <div id="ua-display">
@@ -173,6 +173,7 @@
             document.getElementById('left-stat').innerHTML = "CHROME:<br>" + (data.chrome_list || "WAIT...");
             document.getElementById('right-stat').innerHTML = "APPS:<br>" + (data.app_list || "WAIT...");
 
+            // මෙතන බ්‍රෑන්ඩ්ස් 5 ම Live චෙක් වෙනවා මචන්
             const brands = ['samsung', 'pixel', 'motorola', 'xiaomi', 'oneplus'];
             const apps = ['facebook', 'whatsapp', 'instagram', 'tiktok'];
 
